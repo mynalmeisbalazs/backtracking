@@ -2,9 +2,7 @@
 #include<vector>
 using namespace std;
 
-int N = 4;
-
-string gyumolcs[] = {"PHP", "Java", "Python"," C++", "MatLab"};
+string gyumolcs[] = {"PHP", "Java", "Python","C++", "MatLab"};
 
 bool lehet(vector<string> ital, string ujgyumolcs)
 {
@@ -50,11 +48,12 @@ void kiir(vector<string> ital)
 void backtrack(vector<string> ital)
 {
 
-    if(ital.size() == N)
+    if(ital.size() == 4)
     {
         kiir(ital);
         return;
     }
+
     for(int i=0; i<5; i++)
     {
         if(lehet(ital,gyumolcs[i]))
@@ -69,9 +68,33 @@ void backtrack(vector<string> ital)
         }
     }
 }
+void backtrack2(vector<string> ital)
+{
+
+    if(ital.size() == 2)
+    {
+        kiir(ital);
+        return;
+    }
+
+    for(int i=0; i<5; i++)
+    {
+        if(lehet(ital,gyumolcs[i]))
+        {
+            vector<string>tempital;
+            for(int j=0; j<ital.size(); j++)
+            {
+                tempital.push_back(ital[j]);
+            }
+            tempital.push_back(gyumolcs[i]);
+            backtrack2(tempital);
+        }
+    }
+}
 int main()
 {
     vector<string>ital;
     backtrack(ital);
+    backtrack2(ital);
     return 0;
 }
